@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import AddCar from "./pages/AddCar";
 import PrivateRoute from "./routes/PrivateRoute";
 import Cars from "./pages/Cars";
+import BookCar from "./pages/BookCar"; // ✅ Import BookCar
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
           }
         />
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />            
+        <Route path="/login" element={<Login />} />
         <Route
           path="/add-car"
           element={
@@ -33,6 +34,14 @@ function App() {
           }
         />
         <Route path="/cars" element={<Cars />} />
+        <Route
+          path="/book/:id"
+          element={
+            <PrivateRoute>
+              <BookCar />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

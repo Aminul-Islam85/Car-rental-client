@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Cars = () => {
   const [cars, setCars] = useState([]);
@@ -33,6 +34,9 @@ const Cars = () => {
             <p><strong>Status:</strong> {car.availability}</p>
             <p><strong>Location:</strong> {car.location}</p>
             <p className="mt-2 text-sm text-gray-600">{car.description}</p>
+            <Link to={`/book/${car._id}`} className="btn btn-primary btn-sm mt-3">
+              Book Now
+            </Link>
           </div>
         ))}
       </div>
