@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import AddCar from "./pages/AddCar";
+import PrivateRoute from "./routes/PrivateRoute";
 
 function App() {
   return (
@@ -21,6 +23,16 @@ function App() {
         />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+
+        {/* ✅ Protected Route */}
+        <Route
+          path="/add-car"
+          element={
+            <PrivateRoute>
+              <AddCar />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
