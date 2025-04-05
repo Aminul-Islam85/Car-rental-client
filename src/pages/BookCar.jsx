@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 const BookCar = () => {
   const { id } = useParams();
   const [car, setCar] = useState(null);
+  const [success, setSuccess] = useState("");
 
   useEffect(() => {
     fetch(`http://localhost:5000/api/cars/${id}`)
@@ -12,7 +13,7 @@ const BookCar = () => {
       .catch((err) => console.error("Failed to load car:", err));
   }, [id]);
 
-  const handleBooking = (e) => {
+  const handleBooking = async (e) => {
     e.preventDefault();
     const form = e.target;
 
@@ -24,9 +25,27 @@ const BookCar = () => {
       endDate: form.endDate.value,
     };
 
-    console.log("Booking submitted:", booking);
-    form.reset();
-    alert("Booking request submitted!");
+    try {
+      const res = await fetch("http://localhost:5000/api/bookings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(booking),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setSuccess("✅ Booking submitted successfully!");
+        form.reset();
+      } else {
+        setSuccess("❌ Failed to submit booking.");
+      }
+    } catch (error) {
+      console.error("Booking error:", error);
+      setSuccess("❌ Error while booking.");
+    }
   };
 
   if (!car) return <div className="text-center mt-10">Loading car details...</div>;
@@ -44,6 +63,10 @@ const BookCar = () => {
 
         <button type="submit" className="btn btn-primary">Confirm Booking</button>
       </form>
+
+      {success && (
+        <p className="text-green-600 text-center font-medium mt-4">{success}</p>
+      )}
     </div>
   );
 };
