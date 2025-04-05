@@ -2,11 +2,12 @@ import { useState } from "react";
 
 const AddCar = () => {
   const [error, setError] = useState("");
+  const [showModal, setShowModal] = useState(false); 
 
-  const handleAddCar = (e) => {
+  const handleAddCar = async (e) => {
     e.preventDefault();
     const form = e.target;
-
+  
     const newCar = {
       model: form.model.value,
       dailyPrice: form.dailyPrice.value,
@@ -17,11 +18,31 @@ const AddCar = () => {
       image: form.image.value,
       location: form.location.value,
     };
-
-    console.log("Car to add:", newCar);
-    form.reset();
-    setError("");
+  
+    try {
+      const response = await fetch("http://localhost:5000/api/cars", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newCar)
+      });
+  
+      if (response.ok) {
+        console.log("✅ Car added!");
+        setShowModal(true);
+        form.reset();
+        setError("");
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || "Something went wrong");
+      }
+    } catch (err) {
+      console.error("❌ Error adding car:", err);
+      setError("Network error or server not responding");
+    }
   };
+  
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-base-100 rounded-lg shadow-md mt-8">
@@ -41,6 +62,21 @@ const AddCar = () => {
 
         <button type="submit" className="btn btn-primary md:col-span-2">Add Car</button>
       </form>
+
+      {/* ✅ Modal */}
+      {showModal && (
+        <dialog id="success_modal" className="modal modal-open">
+          <div className="modal-box">
+            <h3 className="font-bold text-lg">🎉 Car Added Successfully!</h3>
+            <p className="py-4">The new car has been added to your system.</p>
+            <div className="modal-action">
+              <form method="dialog">
+                <button className="btn" onClick={() => setShowModal(false)}>Close</button>
+              </form>
+            </div>
+          </div>
+        </dialog>
+      )}
     </div>
   );
 };

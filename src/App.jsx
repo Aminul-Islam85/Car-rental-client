@@ -4,6 +4,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import AddCar from "./pages/AddCar";
 import PrivateRoute from "./routes/PrivateRoute";
+import Cars from "./pages/Cars";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route path="/cars" element={<Cars />} />
       </Routes>
     </BrowserRouter>
   );

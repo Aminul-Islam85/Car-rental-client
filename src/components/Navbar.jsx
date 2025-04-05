@@ -40,6 +40,8 @@ const Navbar = () => {
             <Link to="/register" className="btn btn-primary btn-sm">
               Register
             </Link>
+            <Link to="/cars" className="btn btn-ghost">Browse Cars</Link>
+
           </>
         )}
       </div>
