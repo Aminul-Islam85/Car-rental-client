@@ -22,9 +22,7 @@ function App() {
           }
         />
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-
-        {/* ✅ Protected Route */}
+        <Route path="/login" element={<Login />} />            
         <Route
           path="/add-car"
           element={
