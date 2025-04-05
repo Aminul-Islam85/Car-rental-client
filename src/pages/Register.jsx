@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
-import { updateProfile } from "firebase/auth"; // ✅ Import this
+import { updateProfile } from "firebase/auth"; 
 
 const Register = () => {
   const { createUser } = useContext(AuthContext);
@@ -25,10 +25,10 @@ const Register = () => {
     try {
       const result = await createUser(email, password);
 
-      // ✅ Update Firebase profile with name and photo
+      
       await updateProfile(result.user, {
         displayName: name,
-        photoURL: photo,
+        photoURL: photo || "https://i.ibb.co/default-avatar.png"
       });
 
       form.reset();

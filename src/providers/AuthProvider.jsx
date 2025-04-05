@@ -7,7 +7,6 @@ import {
   createUserWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
-  updateProfile,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
 
