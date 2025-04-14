@@ -16,6 +16,7 @@ const AddCar = () => {
       features: form.features.value.split(","),
       description: form.description.value,
       image: form.image.value,
+      bookingCount: 0,
       location: form.location.value,
     };
   

@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -9,6 +10,7 @@ import BookCar from "./pages/BookCar";
 import MyBookings from "./pages/MyBookings"; 
 import AdminPanel from "./pages/AdminPanel";
 import MyCars from "./pages/MyCars";
+import Home from "./pages/Home";
 
 
 function App() {
@@ -16,17 +18,7 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route
-          path="/Home"
-          element={
-            <div className="min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center bg-base-100 text-center px-4">
-              <h1 className="text-3xl font-bold mb-2">Welcome to Car Rental System 🚗</h1>
-              <p className="text-gray-600 text-lg max-w-md">
-                Search, book, and manage your car rentals all in one place. Start by browsing available cars or adding your own!
-              </p>
-            </div>
-          }
-        />
+        <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route
@@ -73,6 +65,7 @@ function App() {
           }
         />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
