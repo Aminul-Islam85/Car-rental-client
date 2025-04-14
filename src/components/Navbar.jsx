@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut, isAdmin } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -25,6 +25,13 @@ const Navbar = () => {
       <div className="flex-none flex items-center gap-2 sm:gap-4 pr-4">
         {user ? (
           <>
+            <Link to="/cars" className="btn btn-ghost btn-sm">Browse Cars</Link>
+            <Link to="/my-bookings" className="btn btn-ghost btn-sm">My Bookings</Link>
+
+            {isAdmin && (
+              <Link to="/admin" className="btn btn-warning btn-sm">Admin Panel</Link>
+            )}
+
             <span className="text-sm font-medium whitespace-nowrap">
               Hello, {user.displayName || "User"}
             </span>
@@ -34,14 +41,9 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <Link to="/login" className="btn btn-outline btn-sm">
-              Login
-            </Link>
-            <Link to="/register" className="btn btn-primary btn-sm">
-              Register
-            </Link>
-            <Link to="/cars" className="btn btn-ghost">Browse Cars</Link>
-
+            <Link to="/login" className="btn btn-outline btn-sm">Login</Link>
+            <Link to="/register" className="btn btn-primary btn-sm">Register</Link>
+            <Link to="/cars" className="btn btn-ghost btn-sm">Browse Cars</Link>
           </>
         )}
       </div>

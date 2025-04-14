@@ -17,32 +17,34 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const adminEmails = ["admin@admin.com"]; 
+  const isAdmin = user && adminEmails.includes(user.email);
 
-  // Create Account
+  
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  // Login
+  
   const signIn = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  // Google Login
+  
   const googleSignIn = () => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
-  // Logout
+  
   const logOut = () => {
     setLoading(true);
     return signOut(auth);
   };
 
-  // Auth State Change
+  
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
       setUser(loggedUser);
@@ -54,6 +56,7 @@ const AuthProvider = ({ children }) => {
   const authInfo = {
     user,
     loading,
+    isAdmin, 
     createUser,
     signIn,
     googleSignIn,

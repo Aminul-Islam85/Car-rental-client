@@ -5,7 +5,10 @@ import Login from "./pages/Login";
 import AddCar from "./pages/AddCar";
 import PrivateRoute from "./routes/PrivateRoute";
 import Cars from "./pages/Cars";
-import BookCar from "./pages/BookCar"; // ✅ Import BookCar
+import BookCar from "./pages/BookCar";
+import MyBookings from "./pages/MyBookings"; 
+import AdminPanel from "./pages/AdminPanel";
+
 
 function App() {
   return (
@@ -39,6 +42,23 @@ function App() {
           element={
             <PrivateRoute>
               <BookCar />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/my-bookings"
+          element={
+            <PrivateRoute>
+              <MyBookings />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute>
+              <AdminPanel />
             </PrivateRoute>
           }
         />

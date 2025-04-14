@@ -34,9 +34,7 @@ const BookCar = () => {
         body: JSON.stringify(booking),
       });
 
-      const data = await res.json();
-
-      if (res.ok) {
+    if (res.ok) {
         setSuccess("✅ Booking submitted successfully!");
         form.reset();
       } else {
