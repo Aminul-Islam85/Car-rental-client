@@ -22,10 +22,16 @@ const Navbar = () => {
           🚗 Car Rental
         </Link>
       </div>
+
       <div className="flex-none flex items-center gap-2 sm:gap-4 pr-4">
+        {/* Always show Home and Browse Cars */}
+        <Link to="/" className="btn btn-ghost btn-sm">Home</Link>
+        <Link to="/cars" className="btn btn-ghost btn-sm">Available Cars</Link>
+
         {user ? (
           <>
-            <Link to="/cars" className="btn btn-ghost btn-sm">Browse Cars</Link>
+            <Link to="/add-car" className="btn btn-ghost btn-sm">Add Car</Link>
+            <Link to="/my-cars" className="btn btn-ghost btn-sm">My Cars</Link>
             <Link to="/my-bookings" className="btn btn-ghost btn-sm">My Bookings</Link>
 
             {isAdmin && (
@@ -43,7 +49,6 @@ const Navbar = () => {
           <>
             <Link to="/login" className="btn btn-outline btn-sm">Login</Link>
             <Link to="/register" className="btn btn-primary btn-sm">Register</Link>
-            <Link to="/cars" className="btn btn-ghost btn-sm">Browse Cars</Link>
           </>
         )}
       </div>

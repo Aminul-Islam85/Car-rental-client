@@ -8,6 +8,7 @@ import Cars from "./pages/Cars";
 import BookCar from "./pages/BookCar";
 import MyBookings from "./pages/MyBookings"; 
 import AdminPanel from "./pages/AdminPanel";
+import MyCars from "./pages/MyCars";
 
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route
-          path="/"
+          path="/Home"
           element={
             <div className="min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center bg-base-100 text-center px-4">
               <h1 className="text-3xl font-bold mb-2">Welcome to Car Rental System 🚗</h1>
@@ -42,6 +43,15 @@ function App() {
           element={
             <PrivateRoute>
               <BookCar />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/my-cars"
+          element={
+            <PrivateRoute>
+              <MyCars />
             </PrivateRoute>
           }
         />
