@@ -71,8 +71,10 @@ const MyBookings = () => {
         toast.error("Failed to update booking.");
       }
     } catch (err) {
+      console.error("Update failed:", err); 
       toast.error("Error updating booking.");
     }
+    
   };
 
   if (loading) return <div className="text-center mt-10">Loading bookings...</div>;
