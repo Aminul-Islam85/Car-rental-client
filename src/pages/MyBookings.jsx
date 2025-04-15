@@ -1,10 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
+import { FaTrash, FaCalendarAlt } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const MyBookings = () => {
   const { user } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedBooking, setSelectedBooking] = useState(null);
+  const [newDates, setNewDates] = useState({ startDate: "", endDate: "" });
 
   useEffect(() => {
     if (!user?.email) return;
@@ -33,32 +37,102 @@ const MyBookings = () => {
       });
 
       if (res.ok) {
-        setBookings(bookings.filter((b) => b._id !== id));
+        setBookings(bookings.map(b => b._id === id ? { ...b, status: "Canceled" } : b));
+        toast.success("Booking canceled!");
       } else {
-        alert("Failed to cancel booking.");
+        toast.error("Failed to cancel booking.");
       }
     } catch (err) {
       console.error("Cancel error:", err);
-      alert("Something went wrong.");
+      toast.error("Something went wrong.");
+    }
+  };
+
+  const handleModify = (booking) => {
+    setSelectedBooking(booking);
+    setNewDates({ startDate: booking.startDate, endDate: booking.endDate });
+  };
+
+  const handleConfirmModify = async () => {
+    try {
+      const res = await fetch(`http://localhost:5000/api/bookings/${selectedBooking._id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newDates),
+      });
+
+      if (res.ok) {
+        setBookings(bookings.map(b =>
+          b._id === selectedBooking._id ? { ...b, ...newDates } : b
+        ));
+        toast.success("Booking dates updated!");
+        setSelectedBooking(null);
+      } else {
+        toast.error("Failed to update booking.");
+      }
+    } catch (err) {
+      toast.error("Error updating booking.");
     }
   };
 
   if (loading) return <div className="text-center mt-10">Loading bookings...</div>;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="max-w-6xl mx-auto px-4 py-8 overflow-x-auto">
       <h2 className="text-3xl font-bold text-center mb-6">My Bookings</h2>
-      {bookings.map((booking) => (
-        <div key={booking._id} className="bg-base-100 rounded-lg shadow p-4 mb-4">
-          <h3 className="text-xl font-semibold mb-1">{booking.carId?.model || "Car"}</h3>
-          <p><strong>Booking Dates:</strong> {booking.startDate} to {booking.endDate}</p>
-          <p><strong>Email:</strong> {booking.email}</p>
-          <p><strong>Booked At:</strong> {new Date(booking.createdAt).toLocaleString()}</p>
-          <button onClick={() => handleCancel(booking._id)} className="btn btn-outline btn-sm mt-2">
-            Cancel Booking
-          </button>
-        </div>
-      ))}
+
+      <table className="table w-full">
+        <thead className="bg-base-200 text-base font-semibold">
+          <tr>
+            <th>Car Image</th>
+            <th>Model</th>
+            <th>Booking Date</th>
+            <th>Total Price</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {bookings.map((b) => (
+            <tr key={b._id} className="hover">
+              <td><img src={b.carId?.image} alt="car" className="w-20 h-16 rounded" /></td>
+              <td>{b.carId?.model}</td>
+              <td>{new Date(b.createdAt).toLocaleString("en-GB", { hour: "2-digit", minute: "2-digit", day: "2-digit", month: "2-digit", year: "numeric" })}</td>
+              <td>${b.totalPrice || b.carId?.dailyPrice || 0}</td>
+              <td>{b.status || "Confirmed"}</td>
+              <td className="flex gap-2">
+                <button className="btn btn-sm btn-error" onClick={() => handleCancel(b._id)}>
+                  <FaTrash className="mr-1" /> Cancel
+                </button>
+                <button className="btn btn-sm btn-info" onClick={() => handleModify(b)}>
+                  <FaCalendarAlt className="mr-1" /> Modify Date
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Modify Date Modal */}
+      {selectedBooking && (
+        <dialog className="modal modal-open">
+          <div className="modal-box">
+            <h3 className="font-bold text-lg mb-4">Modify Booking Dates</h3>
+            <label className="block mb-2">Start Date:</label>
+            <input type="date" className="input input-bordered w-full mb-4"
+              value={newDates.startDate} onChange={(e) => setNewDates({ ...newDates, startDate: e.target.value })} />
+
+            <label className="block mb-2">End Date:</label>
+            <input type="date" className="input input-bordered w-full mb-4"
+              value={newDates.endDate} onChange={(e) => setNewDates({ ...newDates, endDate: e.target.value })} />
+
+            <div className="modal-action">
+              <button className="btn btn-success" onClick={handleConfirmModify}>Confirm</button>
+              <button className="btn" onClick={() => setSelectedBooking(null)}>Cancel</button>
+            </div>
+          </div>
+        </dialog>
+      )}
     </div>
   );
 };
