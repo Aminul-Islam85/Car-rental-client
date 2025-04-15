@@ -14,7 +14,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import CarDetails from "./pages/CarDetails";
 
-// ✅ Toastify setup
+
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -75,7 +75,7 @@ function App() {
         <Footer />
       </BrowserRouter>
 
-      {/* ✅ Global Toast Container */}
+      
       <ToastContainer position="top-center" />
     </>
   );

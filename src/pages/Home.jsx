@@ -17,7 +17,7 @@ useEffect(() => {
 
   return (
     <div>
-      {/* Banner Section */}
+      
       <section
         className="relative h-[70vh] bg-cover bg-center flex items-center justify-center text-white"
         style={{ backgroundImage: `url('https://images.unsplash.com/photo-1549921296-3a8b60a2a085?auto=format&fit=crop&w=1470&q=80')` }}
@@ -30,7 +30,7 @@ useEffect(() => {
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
+      
 <section className="py-16 bg-base-200">
   <div className="max-w-6xl mx-auto px-4">
     <h2 className="text-3xl font-bold text-center mb-10">Why Choose Us?</h2>
@@ -60,7 +60,7 @@ useEffect(() => {
   </div>
 </section>
 
-{/* Recent Listings Section */}
+
 <section className="py-16 bg-white">
   <div className="max-w-6xl mx-auto px-4">
     <h2 className="text-3xl font-bold text-center mb-10">Recent Listings</h2>
@@ -85,27 +85,27 @@ useEffect(() => {
   </div>
 </section>
 
-{/* Special Offers Section */}
+
 <section className="py-16 bg-base-200">
   <div className="max-w-6xl mx-auto px-4">
     <h2 className="text-3xl font-bold text-center mb-10">Special Offers</h2>
 
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {/* Offer 1 */}
+      
       <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition duration-300 animate-slide-in-left">
         <h3 className="text-xl font-bold mb-2">🎉 15% OFF Weekend Rentals!</h3>
         <p className="text-sm text-gray-600 mb-4">Book any car for the weekend and enjoy a 15% discount.</p>
         <Link to="/cars" className="btn btn-primary btn-sm">Book Now</Link>
       </div>
 
-      {/* Offer 2 */}
+      
       <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition duration-300 animate-bounce hover:scale-105">
         <h3 className="text-xl font-bold mb-2">💎 Luxury Cars at $99/day</h3>
         <p className="text-sm text-gray-600 mb-4">Drive premium cars this holiday season at just $99 per day!</p>
         <Link to="/cars" className="btn btn-primary btn-sm">View Deals</Link>
       </div>
 
-      {/* Offer 3 */}
+      
       <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition duration-300 animate-slide-in-right">
         <h3 className="text-xl font-bold mb-2">🛡️ Free Insurance</h3>
         <p className="text-sm text-gray-600 mb-4">Get complimentary insurance coverage on your first booking.</p>

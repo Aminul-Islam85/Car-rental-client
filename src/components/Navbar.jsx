@@ -24,7 +24,7 @@ const Navbar = () => {
       </div>
 
       <div className="flex-none flex items-center gap-2 sm:gap-4 pr-4">
-        {/* Always show Home and Browse Cars */}
+        
         <Link to="/" className="btn btn-ghost btn-sm">Home</Link>
         <Link to="/cars" className="btn btn-ghost btn-sm">Available Cars</Link>
 

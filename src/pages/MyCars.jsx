@@ -99,7 +99,7 @@ const MyCars = () => {
         </p>
       ) : (
         <>
-          {/* Sort Controls */}
+          
           <div className="flex justify-end mb-4">
             <select
               value={sortOption}
@@ -147,7 +147,7 @@ const MyCars = () => {
             </table>
           </div>
 
-          {/* Update Modal */}
+          
           {showModal && selectedCar && (
             <dialog open className="modal modal-open">
               <div className="modal-box">

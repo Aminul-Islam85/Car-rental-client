@@ -32,7 +32,7 @@ const Register = () => {
       });
 
       form.reset();
-      navigate("/"); // redirect to homepage
+      navigate("/"); 
     } catch (err) {
       setError(err.message);
     }

@@ -115,7 +115,7 @@ const MyBookings = () => {
         </tbody>
       </table>
 
-      {/* Modify Date Modal */}
+      
       {selectedBooking && (
         <dialog className="modal modal-open">
           <div className="modal-box">
