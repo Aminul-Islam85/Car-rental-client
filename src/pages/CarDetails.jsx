@@ -11,7 +11,7 @@ const CarDetails = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/cars/${id}`)
+    fetch(`https://hero-car-rental.vercel.app/api/cars/${id}`)
       .then((res) => res.json())
       .then((data) => setCar(data))
       .catch((err) => console.error("Failed to fetch car details", err));
@@ -27,7 +27,7 @@ const CarDetails = () => {
         endDate: new Date().toISOString().split("T")[0],
       };
 
-      const res = await fetch("http://localhost:5000/api/bookings", {
+      const res = await fetch(`https://hero-car-rental.vercel.app/api/bookings`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(booking),

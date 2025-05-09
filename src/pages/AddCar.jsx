@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
 
 const AddCar = () => {
+  const { user } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false); 
 
@@ -18,10 +20,11 @@ const AddCar = () => {
       image: form.image.value,
       bookingCount: 0,
       location: form.location.value,
+      email: user.email, 
     };
   
     try {
-      const response = await fetch("http://localhost:5000/api/cars", {
+      const response = await fetch(`https://hero-car-rental.vercel.app/api/cars`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -70,10 +73,8 @@ const AddCar = () => {
           <div className="modal-box">
             <h3 className="font-bold text-lg">🎉 Car Added Successfully!</h3>
             <p className="py-4">The new car has been added to your system.</p>
-            <div className="modal-action">
-              <form method="dialog">
-                <button className="btn" onClick={() => setShowModal(false)}>Close</button>
-              </form>
+            <div className="modal-action">            
+                <button className="btn" onClick={() => setShowModal(false)}>Close</button>              
             </div>
           </div>
         </dialog>

@@ -15,7 +15,7 @@ const MyBookings = () => {
 
     const fetchBookings = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/bookings?email=${user.email}`);
+        const res = await fetch(`https://hero-car-rental.vercel.app/api/bookings?email=${user.email}`);
         const data = await res.json();
         setBookings(data);
         setLoading(false);
@@ -32,7 +32,7 @@ const MyBookings = () => {
     if (!confirmed) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/bookings/${id}`, {
+      const res = await fetch(`https://hero-car-rental.vercel.app/api/bookings/${id}`, {
         method: "DELETE",
       });
 
@@ -55,7 +55,7 @@ const MyBookings = () => {
 
   const handleConfirmModify = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/bookings/${selectedBooking._id}`, {
+      const res = await fetch(`https://hero-car-rental.vercel.app/api/bookings/${selectedBooking._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newDates),

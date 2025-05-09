@@ -5,7 +5,7 @@ const Home = () => {
     const [recentCars, setRecentCars] = useState([]);
 
 useEffect(() => {
-  fetch("http://localhost:5000/api/cars")
+  fetch(`https://hero-car-rental.vercel.app/api/cars`)
     .then(res => res.json())
     .then(data => {
       const sorted = data

@@ -11,7 +11,7 @@ const Cars = () => {
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/cars");
+        const res = await fetch(`https://hero-car-rental.vercel.app/api/cars`);
         const data = await res.json();
         setCars(data);
         setLoading(false);

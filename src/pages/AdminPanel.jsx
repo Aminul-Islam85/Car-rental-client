@@ -10,8 +10,8 @@ const AdminPanel = () => {
     const fetchData = async () => {
       try {
         const [carsRes, bookingsRes] = await Promise.all([
-          fetch("http://localhost:5000/api/cars"),
-          fetch("http://localhost:5000/api/bookings"),
+          fetch(`https://hero-car-rental.vercel.app/api/cars`),
+          fetch(`https://hero-car-rental.vercel.app/api/bookings`),
         ]);
 
         const carsData = await carsRes.json();
@@ -34,7 +34,7 @@ const AdminPanel = () => {
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/cars/${id}`, {
+      const res = await fetch(`https://hero-car-rental.vercel.app/api/cars/${id}`, {
         method: "DELETE",
       });
       if (res.ok) {
@@ -51,7 +51,7 @@ const AdminPanel = () => {
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/bookings/${id}`, {
+      const res = await fetch(`https://hero-car-rental.vercel.app/api/bookings/${id}`, {
         method: "DELETE",
       });
       if (res.ok) {

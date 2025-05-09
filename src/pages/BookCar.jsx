@@ -7,7 +7,7 @@ const BookCar = () => {
   const [success, setSuccess] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/cars/${id}`)
+    fetch(`https://hero-car-rental.vercel.app/api/cars/${id}`)
       .then((res) => res.json())
       .then((data) => setCar(data))
       .catch((err) => console.error("Failed to load car:", err));
@@ -26,7 +26,7 @@ const BookCar = () => {
     };
 
     try {
-      const res = await fetch("http://localhost:5000/api/bookings", {
+      const res = await fetch(`https://hero-car-rental.vercel.app/api/bookings`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

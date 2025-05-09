@@ -11,7 +11,7 @@ const MyCars = () => {
   useEffect(() => {
     if (!user?.email) return;
 
-    fetch(`http://localhost:5000/api/cars?email=${user.email}`)
+    fetch(`https://hero-car-rental.vercel.app/api/cars?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => setCars(data))
       .catch((err) => console.error("Failed to load user's cars", err));
@@ -35,7 +35,7 @@ const MyCars = () => {
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/cars/${id}`, {
+      const res = await fetch(`https://hero-car-rental.vercel.app/api/cars/${id}`, {
         method: "DELETE",
       });
 
@@ -70,7 +70,7 @@ const MyCars = () => {
     };
 
     try {
-      const res = await fetch(`http://localhost:5000/api/cars/${selectedCar._id}`, {
+      const res = await fetch(`https://hero-car-rental.vercel.app/api/cars/${selectedCar._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedCar),

@@ -5,7 +5,7 @@ const CarList = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/cars")
+    fetch(`https://hero-car-rental.vercel.app/api/cars`)
       .then((res) => res.json())
       .then((data) => {
         setCars(data);
